@@ -11,27 +11,24 @@
   <button @click="keycloak.logout()">logout</button>
 
   <h1>Oauth2 & Keycloak PKCE tester</h1>
-  <hr/>
-  <label for="url"
-    >Test requests with your auth token to some backend URL:
+  <hr />
+  <label for="url">Test requests with your auth token to some backend URL:
   </label>
-  <input
-    style="width: 300px"
+  <input style="width: 300px"
     type="text"
     id="url"
     name="url"
     placeholder="http://localhost:8080/test"
-    v-model="testUrl"
-  />
+    v-model="testUrl" />
 
   <button @click="sendRequest()">Send GET Request to URL</button>
 
   <div>
-   
-      Response:<br>
-      <hr>
-      {{ this.data }}
-  
+
+    Response:<br>
+    <hr>
+    {{ this.data }}
+
   </div>
 </template>
 
@@ -59,7 +56,7 @@ export default {
           this.data = response.data;
         })
         .catch((error) => {
-          console.error("Der Request ist gescheitert", error);
+          console.error("The request failed", error);
         });
     },
   },

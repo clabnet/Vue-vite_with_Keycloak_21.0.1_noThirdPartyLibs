@@ -15,7 +15,6 @@ const props = reactive({ keycloak: keycloak })
 
 keycloak
   .init({ onLoad: initOptions.onLoad })
-  // .init()
   .then((auth) => {
     if (!auth) {
       window.location.reload();
@@ -33,10 +32,10 @@ keycloak
     //Token Refresh
     setInterval(() => {
       keycloak
-        .updateToken(70)
+        .updateToken(10)
         .then((refreshed) => {
           if (refreshed) {
-            console.log("Token refreshed" + refreshed);
+            console.log("Token refreshed", refreshed);
           } else {
             console.log(
               "Token not refreshed, valid for " +
@@ -52,7 +51,7 @@ keycloak
         .catch(() => {
           console.log("Failed to refresh token");
         });
-    }, 6000);
+    }, 10000);
   })
   .catch((err) => {
     console.error("Authentication Failed", err);
