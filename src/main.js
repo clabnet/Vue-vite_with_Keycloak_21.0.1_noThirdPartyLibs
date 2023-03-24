@@ -23,7 +23,7 @@ import { h, reactive } from "vue";
 
 
 let initOptions = {
-  url: 'http://localhost:8080/realms/demo/protocol/openid-connect/auth/', realm: 'demo', clientId: 'app', onLoad: 'login-required'
+  url: 'http://localhost:8080/', realm: 'demo', clientId: 'app', onLoad: 'login-required'
 }
 
 let keycloak = new Keycloak(initOptions);
