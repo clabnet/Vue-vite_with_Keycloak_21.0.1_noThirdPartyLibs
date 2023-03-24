@@ -5,20 +5,33 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import { h, reactive } from "vue";
 
-
 //==== Keycloack ====================== 
+// https://www.keycloak.org/docs/latest/securing_apps/index.html#_javascript_adapter
+// let initOptions = {
+//   // realm: "demo",
+//   // url: "http://localhost:8080/",
+//   // clientId: "app",
+//   "onLoad": "login-required",
+//   "clientId": "app",
+//   "realm": "demo",
+//   "auth-server-url": "http://localhost:8080/realms/demo/protocol/openid-connect/auth/",
+//   // "ssl-required": "external",
+//   // "resource": "app",
+//   // "public-client": true,
+//   // "confidential-port": 0
+// };
+
+
 let initOptions = {
-  url: "http://localhost:8180/",
-  realm: "yourrealm_dev",
-  clientId: "your_client",
-  onLoad: "login-required",
-};
+  url: 'http://localhost:8080/realms/demo/protocol/openid-connect/auth/', realm: 'demo', clientId: 'app', onLoad: 'login-required'
+}
 
 let keycloak = new Keycloak(initOptions);
 const props = reactive({ keycloak: keycloak })
 
 keycloak
   .init({ onLoad: initOptions.onLoad })
+  // .init()
   .then((auth) => {
     if (!auth) {
       window.location.reload();
@@ -30,7 +43,7 @@ keycloak
       })
 
       app.use(VueAxios, axios);
-      app.mount("#app"); 
+      app.mount("#app");
     }
 
     //Token Refresh
@@ -43,12 +56,12 @@ keycloak
           } else {
             console.log(
               "Token not refreshed, valid for " +
-                Math.round(
-                  keycloak.tokenParsed.exp +
-                    keycloak.timeSkew -
-                    new Date().getTime() / 1000
-                ) +
-                " seconds"
+              Math.round(
+                keycloak.tokenParsed.exp +
+                keycloak.timeSkew -
+                new Date().getTime() / 1000
+              ) +
+              " seconds"
             );
           }
         })
@@ -57,8 +70,8 @@ keycloak
         });
     }, 6000);
   })
-  .catch(() => {
-    console.log("Authenticated Failed");
+  .catch((err) => {
+    console.error("Authentication Failed", err);
   });
 //==== Keycloack ====================== 
 
