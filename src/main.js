@@ -27,7 +27,13 @@ keycloak
 
       app.use(VueAxios, axios);
       app.mount("#app");
+
+      console.log(keycloak);
     }
+
+    // TODO: Maybe dont store the token in the localstore, rather use it direct from the keycloak.token object
+    localStorage.setItem("vue-token", keycloak.token);
+    localStorage.setItem("vue-refresh-token", keycloak.refreshToken);
 
     //Token Refresh
     setInterval(() => {
