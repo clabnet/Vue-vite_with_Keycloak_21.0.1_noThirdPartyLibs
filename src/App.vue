@@ -18,7 +18,7 @@
     type="text"
     id="url"
     name="url"
-    placeholder="http://localhost:8080/test"
+    placeholder="http://localhost:5000/api/mediaservice/mathengine"
     v-model="testUrl" />
 
   <button @click="sendRequest()">Send GET Request to URL</button>
@@ -39,7 +39,7 @@ export default {
   data: () => {
     return {
       data: "Nothing here",
-      testUrl: "http://localhost:8090/appartmentlist",
+      testUrl: "http://localhost:5000/api/mediaservice/mathengine",
     };
   },
   methods: {

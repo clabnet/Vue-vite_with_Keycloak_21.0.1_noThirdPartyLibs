@@ -7,7 +7,7 @@ import { h, reactive } from "vue";
 
 //==== Keycloack ====================== 
 let initOptions = {
-  url: 'http://localhost:8080/', realm: 'demo', clientId: 'app', onLoad: 'login-required'
+  url: 'http://localhost:8080/', realm: 'demo', clientId: 'app', onLoad: 'login-required', redirectUri: 'http://localhost:3000/'
 }
 
 let keycloak = new Keycloak(initOptions);
@@ -32,8 +32,8 @@ keycloak
     }
 
     // TODO: Maybe dont store the token in the localstore, rather use it direct from the keycloak.token object
-    localStorage.setItem("vue-token", keycloak.token);
-    localStorage.setItem("vue-refresh-token", keycloak.refreshToken);
+    // localStorage.setItem("vue-token", keycloak.token);
+    // localStorage.setItem("vue-refresh-token", keycloak.refreshToken);
 
     //Token Refresh
     setInterval(() => {
